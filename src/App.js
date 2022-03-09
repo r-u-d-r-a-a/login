@@ -1,22 +1,60 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Welcome from './Welcome.js'; 
+import GoogleLogin from 'react-google-login';
+import { useState } from 'react';
+
+import {Link} from 'react-router-dom';
+
+
 
 function App() {
+
+  const [data,setData] = useState("")
+
+  const handleFailure = (result) =>
+  {
+    alert(result);
+
+  };
+
+  const handleLogin = (googleData) =>
+  {
+    console.log(googleData);
+
+   setData(googleData.profileObj.email);
+
+    console.log(googleData.profileObj.email);
+
+  //window.location.href="http://localhost:3000/welcome"
+
+
+  };
+
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      
+        React login
+        
+          <GoogleLogin
+
+        clientId = {"624737974358-kf111ohntkehsktug73crctr6fgju6qc.apps.googleusercontent.com"} 
+        buttonText = "Log in with Google"
+         onSuccess={handleLogin}
+        onFailure={handleFailure}
+        cookiePolicy={'single_host_origin'}       
+
         >
-          Learn React
-        </a>
+          
+        </GoogleLogin>
+        
+        
+
+      {/* <h1>{data}</h1> */}
+
       </header>
     </div>
   );
